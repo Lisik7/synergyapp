@@ -1,23 +1,25 @@
-import logo from './logo.svg';
 import './App.css';
-
+import Movie from './components/Movie'
+import {useState, useEffect} from 'react'
+const movieApi = 'https://tv-api.com/en/API/SearchMovie/k_4uxjsucc/inception 2010'
 function App() {
+  const movies=[1,2,3]
+  const [movie,setMovie] = useState ([])
+
+  useEffect(()=>{
+    fetch(movieApi)
+    .then(res => res.json())
+    .then(res => console.log(res))
+  },[])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+    <div className="movies">
+      <header>
+        <input type = "text" placeholder = "Search..."></input>
       </header>
+      <div className="movie">
+      {movies.map((e,i)=> <Movie key={i}/>)}
+      </div>
     </div>
   );
 }
